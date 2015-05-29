@@ -1,0 +1,20 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class ProgettoMartoglia
+{
+  public static void main (String args [])
+  {    
+    DBConnection database = new DBConnection("postgres","micaela");
+    QueryExecuter qe = new QueryExecuter(database);
+    
+    JFrame f = new JFrame ("Database"); 
+    Pannello p = new Pannello(qe,database);
+    f.add(p);
+    f.pack();
+    f.setResizable(false);
+    f.setLocation(100,100);
+    f.setVisible (true);
+    f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+  }
+}

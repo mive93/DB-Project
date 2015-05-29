@@ -1,0 +1,123 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+
+//10. Eliminare una prenotazione fatta da uno studente';
+//11. Eliminare una Risorsa;
+//12. Eliminare un utente;
+public class PannelloElimina extends JPanel implements ActionListener
+{
+  
+  private QueryExecuter qe;
+  private DBConnection database;
+  private JButton bR;
+  private JButton bU;
+  private JButton bP;
+  private JLabel lR;
+  private JLabel lU;
+  private JLabel lP1;
+  private JLabel lP2;
+  private JLabel lP3;
+  private JLabel lP4;
+  private JTextField tR;
+  private JTextField tU;
+  private JTextField tP1;
+  private JTextField tP2;
+  private JTextField tP3;
+  private JTextField tP4;
+  private SpringLayout layout;
+  
+   
+  public PannelloElimina(QueryExecuter qe, DBConnection database)
+  {
+    super();
+    
+    this.qe = qe;
+    this.database = database;
+    
+    layout = new SpringLayout();
+    this.setLayout(layout);
+    
+    lR = new JLabel("Inserisci l'id risorsa da eliminare");
+    tR = new JTextField(15);
+    bR = new JButton("Elimina Risorsa");
+    
+    lU = new JLabel("Inserisci il codice fiscale dell'utente da eliminare");
+    tU = new JTextField(15);
+    bU = new JButton("Elimina Utente");
+    
+    lP1 = new JLabel("Inserisci la data della prenotazione da eliminare");
+    lP2 = new JLabel("Inserisci l'ora della prenotazione da eliminare");
+    lP3 = new JLabel("Inserisci l'id posto della prenotazione da eliminare");
+    lP4 = new JLabel("Inserisci l'id del locale della prenotazione da eliminare");
+    
+    tP1 = new JTextField(15);
+    tP2 = new JTextField(15);
+    tP3 = new JTextField(15);
+    tP4 = new JTextField(15);
+    bP = new JButton("Elimina Prenotazione");
+    
+    
+    tR.addActionListener(this);
+    tU.addActionListener(this);
+    tP1.addActionListener(this);
+    tP2.addActionListener(this);
+    tP3.addActionListener(this);
+    tP4.addActionListener(this);
+    bR.addActionListener(this);
+    bU.addActionListener(this);
+    bP.addActionListener(this);
+   
+    add(lR);
+    add(tR);
+    add(bR);
+    
+    /*
+    add(lU);
+    add(tU);
+    add(bU);
+    
+    add(lP1);
+    add(tP1);
+    add(lP2);
+    add(tP2);
+    add(lP3);
+    add(tP3);
+    add(lP4);
+    add(tP4);
+    add(bP);
+    */
+    
+    layout.putConstraint(SpringLayout.WEST, lR, 5,SpringLayout.WEST, this);
+    layout.putConstraint(SpringLayout.NORTH, lR, 10,SpringLayout.NORTH, this);
+    layout.putConstraint(SpringLayout.WEST, tR, 200,SpringLayout.WEST, lR);
+    layout.putConstraint(SpringLayout.NORTH, tR, 10,SpringLayout.NORTH, this);
+    layout.putConstraint(SpringLayout.WEST, bR, 200,SpringLayout.WEST, tR);
+    layout.putConstraint(SpringLayout.NORTH, bR, 5,SpringLayout.NORTH, this);
+                           
+    
+  }
+  
+  public void actionPerformed(ActionEvent e) {
+  
+    String sql = null;
+    if(e.getSource() == bR)
+      sql = "DELETE FROM RISORSA WHERE idRis = "+tR.getText();
+    else if (e.getSource() == bP)
+      sql = "DELETE FROM PRENOTAZIONE WHERE Data = '"+tP1.getText()+"' AND Ora ='"
+      +tP2.getText()+"' AND IdPosto = "+tP3.getText()+
+      " AND IdLoc = "+tP4.getText();
+    else if (e.getSource() == bU)
+      sql = "DELETE FROM UTENTE WHERE CF= '"+tU.getText()+"'";
+      
+      qe.eseguiUpdate(sql);
+      tR.setText(null);
+      tU.setText(null);
+      tP1.setText(null);
+      tP2.setText(null);
+      tP3.setText(null);
+      tP4.setText(null);
+    
+  }
+}

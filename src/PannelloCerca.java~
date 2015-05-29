@@ -1,0 +1,17 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class PannelloCerca extends JPanel
+{
+  private QueryExecuter qe;
+  private DBConnection database;
+  
+ public PannelloCerca(QueryExecuter qe, DBConnection database)
+  {
+    super();
+    
+    this.qe = qe;
+    this.database = database;
+   
+  }
+}

@@ -1,0 +1,31 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class PannelloScelta extends JPanel {
+  
+  private JButton select;
+  private JButton find;
+  private JButton update;
+  private JButton delete;
+    
+  public PannelloScelta() {
+    
+    super();
+    
+    GridLayout layout = new GridLayout(0,1);
+    this. setLayout(layout);
+    select = new JButton("SELECT");
+    find = new JButton("FIND");
+    update = new JButton("UPDATE");
+    delete = new JButton("DELETE");
+    
+    add(select);
+    add(find);
+    add(update);
+    add(delete);
+    
+    
+  }
+
+  
+}

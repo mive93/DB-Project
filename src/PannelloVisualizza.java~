@@ -1,0 +1,26 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class PannelloVisualizza extends JPanel
+{
+  private String [] tabelle = {"Account","Utente","Studente","Laureando","Docente",
+    "NonDocente","Tecnico","Locale","NumAccessi","Laboratorio","Assegnazione",
+    "Prenotazione","Risorsa","Permesso"};
+  private SpinnerListModel modelloVisualizza;
+  private JSpinner spinner;
+  private JLabel vis;
+  
+
+  public PannelloVisualizza()
+  {
+    super();
+    
+    vis = new JLabel("Visualizza");
+    modelloVisualizza = new SpinnerListModel(tabelle);
+    spinner = new JSpinner(modelloVisualizza);
+    add(vis);
+    add(spinner);
+  
+  }
+}
+  
